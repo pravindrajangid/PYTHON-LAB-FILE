@@ -11,6 +11,9 @@ print(df.shape)
 print("\nData Types:")
 print(df.dtypes)
 
+print("n\summary:")
+print(df.describe())
+
 filtered = df[df["Marks"] >= 50]
 
 print("\nFiltered Data:")
