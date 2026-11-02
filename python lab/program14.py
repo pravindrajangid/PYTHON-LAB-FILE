@@ -24,19 +24,28 @@ def load_pickle(filename):
     return obj
 
 # Shelve: Store Object
-def save_shelve(key, obj, filename="students.db"):
-    with shelve.open(filename) as database:
-        database[key] = obj
+def save_shelve(filename, student):
+    import os
+    import shelve
+
+    folder = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(folder, filename)
+
+    with shelve.open(db_path, flag='c') as database:
+        database["student"] = student
+
     print("Object saved using shelve.")
 
 # Shelve: Load Object
-def load_shelve(key, filename="students.db"):
-    with shelve.open(filename) as database:
-        obj = database.get(key)
+def load_shelve(filename):
+    import os
+    import shelve
 
-    print("Object restored using shelve.")
-    return obj
+    folder = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(folder, filename)
 
+    with shelve.open(db_path, flag='r') as database:
+        return database["student"]
 # Example
 
 student = Student(
